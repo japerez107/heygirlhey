@@ -11,7 +11,7 @@ var command = process.argv[2];
 var input = process.argv;
 
 
-//using a switch/case statement 
+//switch/case statement
 
 switch (command) {
   case "concert-this":
@@ -32,42 +32,12 @@ switch (command) {
 }
 
 
-
-//Spotify search 
-function searchSpotify() {
-  // this information was found 
-  var spotify = new Spotify({
-    id: ac963f821fa1455dbb656d506ea5d2ee,
-    secret: d0dd627148754fe9bc0d6529d12526c8
-  });
-
-  spotify.search({ type: 'track', query: 'All the Small Things' }, function (err, data) {
-    if (err) {
-      return console.log('Error occurred: ' + err);
-    }
-
-    console.log(data);
-  });
-};
-
-//function to search bands in town for events 
-function searchBandsintown() {
-
-  var bandsintown = require('bandsintown')(APP_ID);
-
-  bandsintown
-    .getArtistEventList()
-    .then(function (events) {
-      // return array of events
-    });
-}
-
+//search movies function 
 
 function searchMovies() {
 
   var movieName = "";
-  // Loop through all the words in the node argument
-  // And do a little for-loop magic to handle the inclusion of "+"s
+
   for (var i = 3; i < input.length; i++) {
 
     if (i > 3 && i < input.length) {
@@ -97,6 +67,69 @@ function searchMovies() {
   );
 
 }
+//function to search bands in town for events 
+function searchBandsintown() {
+
+  //using similar code to search movies
+  var bandName = "";
+
+  for (var i = 3; i < input.length; i++) {
+
+    if (i > 3 && i < input.length) {
+      bandName = bandName + "+" + input[i];
+    }
+    else {
+      bandName += input[i];
+
+    }
+  }
+  var queryURL = "https://rest.bandsintown.com/artists/" + bandName + "/events?app_id=codingbootcamp";
+
+  console.log(queryURL);
+
+  axios.get(queryURL)
+    .then(function (events) {
+      console.log("Venue: " + events.data[0].venue.name);
+      console.log("Location: " + events.data[0].venue.city);
+      console.log("Date: " + moment(events.data[0].datetime).format('MM/DD/YY'));
+
+    });
+}
+
+//Spotify search 
+function searchSpotify() {
+
+  // this information was found from npm 
+  var spotify = new Spotify({
+    id: spotifyKeyInfo["spotify"].id,
+    secret: spotifyKeyInfo["spotify"].secret
+  });
+
+  //using similar code to what i used in search movie 
+  var songName = "";
+
+  for (var i = 3; i < input.length; i++) {
+
+    if (i > 3 && i < input.length) {
+      songName = songName + "+" + input[i];
+    }
+    else {
+      songName += input[i];
+
+    }
+  }
+  spotify.search({ type: 'track', query: songName }, function (err, data) {
+    if (err) {
+      return console.log('Error occurred: ' + err);
+    }
+
+    console.log("Artist: " + songResponse.tracks.items[0].artists[0].name);
+    console.log("Song: " + songResponse.tracks.items[0].name);
+    console.log("URL: " + songResponse.tracks.items[0].preview_url);
+    console.log("Album: " + songResponse.tracks.items[0].album.name);
+  });
+};
+
 
 
 function doIt() {
