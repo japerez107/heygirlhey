@@ -47,6 +47,9 @@ For this assignment you will be using the command line to process/ call certain 
 - Movie OMDB output 
 ![spotify](https://github.com/japerez107/heygirlhey/blob/master/images/spotify-this-song.png)
 - Spotify Error image
+  - I was still having issues with getting an output from my spotify api call it kept saying error and googled and looked up npm spotify to recheck the example. 
+  
+  
 
 ## Author
 Jacqueline P. 
