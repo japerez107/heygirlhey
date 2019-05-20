@@ -41,5 +41,11 @@ For this assignment you will be using the command line to process/ call certain 
 - moment 
  
 ## Screenshots 
+![Bandsintown](https://github.com/japerez107/heygirlhey/blob/master/images/concert-this.png)
+- Bands in Towns output
+![omdb](https://github.com/japerez107/heygirlhey/blob/master/images/movie-this.png)
+- Movie OMDB output 
+![spotify](https://github.com/japerez107/heygirlhey/blob/master/images/spotify-this-song.png)
+- Spotify Error image
 
 
