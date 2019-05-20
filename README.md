@@ -48,4 +48,5 @@ For this assignment you will be using the command line to process/ call certain 
 ![spotify](https://github.com/japerez107/heygirlhey/blob/master/images/spotify-this-song.png)
 - Spotify Error image
 
-
+## Author
+Jacqueline P. 
