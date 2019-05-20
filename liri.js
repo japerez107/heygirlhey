@@ -38,23 +38,16 @@ function searchMovies() {
 
   var movieName = "";
 
-//
-  if (!movieName ) {
+  for (var i = 3; i < input.length; i++) {
 
-    movieName = "Mr.Nobody"
-  }
-  else {
-
-    for (var i = 3; i < input.length; i++) {
-
-      if (i > 3 && i < input.length) {
-        movieName = movieName + "+" + input[i];
-      }
-      else {
-        movieName += input[i];
-      }
+    if (i > 3 && i < input.length) {
+      movieName = movieName + "+" + input[i];
+    }
+    else {
+      movieName += input[i];
     }
   }
+
 
   var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
 
@@ -87,7 +80,6 @@ function searchBandsintown() {
     }
     else {
       bandName += input[i];
-
     }
   }
   var queryURL = "https://rest.bandsintown.com/artists/" + bandName + "/events?app_id=codingbootcamp";
@@ -98,7 +90,7 @@ function searchBandsintown() {
     .then(function (events) {
       console.log("Venue: " + events.data[0].venue.name);
       console.log("Location: " + events.data[0].venue.city);
-      console.log("Date: " + moment(events.data[0].datetime).format('MM/DD/YY'));
+      console.log("Date: " + moment(events.data[0].datetime).format('MM/DD/YYYY'));
 
     });
 }
@@ -107,33 +99,43 @@ function searchBandsintown() {
 function searchSpotify() {
 
   // this information was found from npm 
-  // var spotify = new Spotify({
-  //   id: spotifyKeyInfo["spotify"].id,
-  //   secret: spotifyKeyInfo["spotify"].secret
-  // });
+  var spotify = new Spotify( keys.spotify
+  //   id: keys.spotify["spotify"].id,
+  //   secret: keys.spotify["spotify"].secret
+  // }
+  );
+  // var spotify = new Spotify(keys.spotifyKeys);
 
   //using similar code to what i used in search movie 
   var songName = "";
 
-  for (var i = 3; i < input.length; i++) {
-
-    if (i > 3 && i < input.length) {
-      songName = songName + "+" + input[i];
-    }
-    else {
-      songName += input[i];
-
-    }
-  }
   spotify.search({ type: 'track', query: songName }, function (err, data) {
     if (err) {
+
+      // for (var i = 3; i < input.length; i++) {
+
+      //   if (i > 3 && i < input.length) {
+      //     songName = songName + "+" + input[i];
+      //   }
+      //   else {
+      //     songName += input[i];
+
+      //   }
+      // }
+      console.log("Artist: " + songName.tracks.items[0].artists[0].name);
+      console.log("Song: " + songName.tracks.items[0].name);
+      console.log("URL: " + songName.tracks.items[0].preview_url);
+      console.log("Album: " + songName.tracks.items[0].album.name);
+    }
+
+    else {
       return console.log('Error occurred: ' + err);
     }
 
-    console.log("Artist: " + songName.tracks.items[0].artists[0].name);
-    console.log("Song: " + songName.tracks.items[0].name);
-    console.log("URL: " + songName.tracks.items[0].preview_url);
-    console.log("Album: " + songName.tracks.items[0].album.name);
+    // console.log("Artist: " + songName.tracks.items[0].artists[0].name);
+    // console.log("Song: " + songName.tracks.items[0].name);
+    // console.log("URL: " + songName.tracks.items[0].preview_url);
+    // console.log("Album: " + songName.tracks.items[0].album.name);
   });
 };
 
@@ -141,9 +143,18 @@ function searchSpotify() {
 
 function doIt() {
 
+  //looked at inclass assignemt read example
   fs.readFile("random.txt", "utf8", function (error, data) {
 
+    if (error) {
+      return console.log(error);
+    }
 
+    var text = data.split(",")
+
+    for (var i = 0; i < text.length; i++) {
+    console.log(text[i]);
+    }
 
   });
 
