@@ -38,14 +38,21 @@ function searchMovies() {
 
   var movieName = "";
 
-  for (var i = 3; i < input.length; i++) {
+//
+  if (!movieName ) {
 
-    if (i > 3 && i < input.length) {
-      movieName = movieName + "+" + input[i];
-    }
-    else {
-      movieName += input[i];
+    movieName = "Mr.Nobody"
+  }
+  else {
 
+    for (var i = 3; i < input.length; i++) {
+
+      if (i > 3 && i < input.length) {
+        movieName = movieName + "+" + input[i];
+      }
+      else {
+        movieName += input[i];
+      }
     }
   }
 
@@ -100,10 +107,10 @@ function searchBandsintown() {
 function searchSpotify() {
 
   // this information was found from npm 
-  var spotify = new Spotify({
-    id: spotifyKeyInfo["spotify"].id,
-    secret: spotifyKeyInfo["spotify"].secret
-  });
+  // var spotify = new Spotify({
+  //   id: spotifyKeyInfo["spotify"].id,
+  //   secret: spotifyKeyInfo["spotify"].secret
+  // });
 
   //using similar code to what i used in search movie 
   var songName = "";
@@ -123,15 +130,21 @@ function searchSpotify() {
       return console.log('Error occurred: ' + err);
     }
 
-    console.log("Artist: " + songResponse.tracks.items[0].artists[0].name);
-    console.log("Song: " + songResponse.tracks.items[0].name);
-    console.log("URL: " + songResponse.tracks.items[0].preview_url);
-    console.log("Album: " + songResponse.tracks.items[0].album.name);
+    console.log("Artist: " + songName.tracks.items[0].artists[0].name);
+    console.log("Song: " + songName.tracks.items[0].name);
+    console.log("URL: " + songName.tracks.items[0].preview_url);
+    console.log("Album: " + songName.tracks.items[0].album.name);
   });
 };
 
 
 
 function doIt() {
+
+  fs.readFile("random.txt", "utf8", function (error, data) {
+
+
+
+  });
 
 }
